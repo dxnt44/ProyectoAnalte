@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Proyecto</string>
+    <string name="title_activity_registro">registro</string>
+    <string name="title_activity_usuario">usuario</string>
+    <string name="title_activity_retrofit_client">RetrofitClient</string>
+    <string name="title_activity_api_service">ApiService</string>
+    <string name="title_activity_login_response">LoginResponse</string>
+    <string name="title_activity_registro_response">RegistroResponse</string>
+</resources>

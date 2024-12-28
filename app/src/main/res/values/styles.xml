@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Tema sin ActionBar y fondo claro -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <!-- Color de fondo claro -->
+        <item name="android:windowBackground">@android:color/white</item>
+
+        <!-- No mostrar ActionBar -->
+        <item name="windowActionBar">false</item>
+
+        <!-- Otros atributos de estilo si es necesario -->
+        <item name="android:textColor">#000000</item>
+    </style>
+</resources>
