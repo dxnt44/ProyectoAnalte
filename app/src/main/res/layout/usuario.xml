@@ -66,23 +66,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
-    <EditText
-        android:id="@+id/textTotal"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="404dp"
-        android:background="@drawable/texto_redondo"
-        android:gravity="center"
-        android:inputType="number"
-        android:padding="10dp"
-        android:text="0"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
@@ -116,7 +99,7 @@
         android:layout_marginTop="492dp"
         android:background="@drawable/texto_redondo"
         android:gravity="center"
-        android:inputType="number"
+        android:inputType="text"
         android:padding="10dp"
         android:text="0"
         android:textColor="@color/black"
@@ -142,7 +125,7 @@
     <EditText
         android:id="@+id/textSinLeer"
         android:layout_width="50dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginTop="576dp"
         android:background="@drawable/texto_redondo"
         android:gravity="center"
@@ -239,9 +222,26 @@
         android:background="@drawable/boton_redondo"
         android:gravity="center"
         android:text="Cerrar Sesion"
+        android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout"
         app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textTotal"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="153dp"
+        android:background="@drawable/texto_redondo"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

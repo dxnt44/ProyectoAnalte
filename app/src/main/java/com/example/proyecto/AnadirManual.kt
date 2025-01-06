@@ -81,6 +81,14 @@ class AnadirManual : AppCompatActivity() {
     }
 
     private fun guardarLibro() {
+        val sharedPreferences = getSharedPreferences("SesionUsuario", MODE_PRIVATE)
+        val idUsuario = sharedPreferences.getInt("id_usuario", -1)
+
+        if (idUsuario == -1) {
+            Toast.makeText(this, "Error al obtener el ID del usuario", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         val titulo = binding.editTextText9.text.toString()
         val autor = binding.editTextText8.text.toString()
         val genero = binding.editTextText10.text.toString()
@@ -100,8 +108,9 @@ class AnadirManual : AppCompatActivity() {
             convertirImagenABase64(BitmapFactory.decodeResource(resources, R.drawable.libro_default))
         }
 
-        // Crear objeto para enviar al servidor
-        val libro = Libro(
+        // Llamada al servicio web para agregar el libro
+        val call = RetrofitClient.apiService.agregarLibro(
+            idUsuario = idUsuario,
             titulo = titulo,
             autor = autor,
             genero = genero,
@@ -111,12 +120,10 @@ class AnadirManual : AppCompatActivity() {
             portada = imagenBase64
         )
 
-        // Llamada al servicio web
-        val call = RetrofitClient.apiService.agregarLibro(libro)
         call.enqueue(object : Callback<Respuesta> {
             override fun onResponse(call: Call<Respuesta>, response: Response<Respuesta>) {
                 if (response.isSuccessful && response.body()?.estado == "exito") {
-                    Toast.makeText(this@AnadirManual, "com.example.proyecto.Libro guardado correctamente", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@AnadirManual, "Libro guardado correctamente", Toast.LENGTH_SHORT).show()
                     finish() // Finalizar actividad
                 } else {
                     Toast.makeText(this@AnadirManual, "Error al guardar el libro", Toast.LENGTH_SHORT).show()

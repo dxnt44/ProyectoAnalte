@@ -81,19 +81,27 @@ class registro : AppCompatActivity() {
     }
 
     private fun registrarUsuario(nombre: String, correo: String, contrasena: String) {
-        // Realizar la solicitud POST para registrar el usuario
         val call = RetrofitClient.apiService.registrarUsuario("registro", nombre, correo, contrasena)
         call.enqueue(object : Callback<RegistroResponse> {
             override fun onResponse(call: Call<RegistroResponse>, response: Response<RegistroResponse>) {
                 if (response.isSuccessful) {
                     val registroResponse = response.body()
                     if (registroResponse != null && registroResponse.estado == "exito") {
-                        // Mostrar mensaje de éxito
-                        Toast.makeText(this@registro, registroResponse.mensaje, Toast.LENGTH_SHORT).show()
+                        // Guardar sesión en SharedPreferences
+                        val sharedPreferences = getSharedPreferences("SesionUsuario", MODE_PRIVATE)
+                        val editor = sharedPreferences.edit()
+                        editor.putInt("id_usuario", registroResponse.id_usuario ?: -1)
+                        editor.putString("nombre", nombre)
+                        editor.putString("correo", correo)
+                        editor.putBoolean("sesion_activa", true)
+                        editor.apply()
 
-                        // Aquí puedes navegar a otra actividad, por ejemplo a la actividad de usuario
+                        // Redirigir al usuario a la pantalla principal
                         val intent = Intent(this@registro, usuario::class.java)
                         startActivity(intent)
+                        finish()
+
+                        Toast.makeText(this@registro, registroResponse.mensaje, Toast.LENGTH_SHORT).show()
                     } else {
                         Toast.makeText(this@registro, registroResponse?.mensaje ?: "Error desconocido", Toast.LENGTH_SHORT).show()
                     }
@@ -103,7 +111,6 @@ class registro : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<RegistroResponse>, t: Throwable) {
-                println("registro: Error de conexión: ${t.message}")
                 Toast.makeText(this@registro, "Error de conexión: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })

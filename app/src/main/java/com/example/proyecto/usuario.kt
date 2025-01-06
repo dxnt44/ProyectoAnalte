@@ -2,6 +2,7 @@ package com.example.proyecto
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -34,8 +35,42 @@ class usuario : AppCompatActivity() {
             startActivity(intent)
         }
 
+        // Configurar botón de cerrar sesión
+        val cerrarSesionButton = findViewById<Button>(R.id.btnCerrarSesion)
+        cerrarSesionButton.setOnClickListener {
+            cerrarSesion()
+        }
+
+        // Mostrar nombre y correo del usuario
+        cargarDatosUsuario()
+
         // Cargar estadísticas del usuario
         cargarEstadisticas()
+    }
+
+    private fun cargarDatosUsuario() {
+        val sharedPreferences = getSharedPreferences("SesionUsuario", MODE_PRIVATE)
+        val nombreUsuario = sharedPreferences.getString("nombre", "Usuario")
+        val correoUsuario = sharedPreferences.getString("correo", "Correo no disponible")
+
+        // Actualizar los TextView correspondientes
+        findViewById<TextView>(R.id.textNombre).text = nombreUsuario
+        findViewById<TextView>(R.id.textCorreo).text = correoUsuario
+    }
+
+    private fun cerrarSesion() {
+        // Limpiar los datos de la sesión en SharedPreferences
+        val sharedPreferences = getSharedPreferences("SesionUsuario", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.clear()
+        editor.apply()
+
+        // Redirigir al login
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
+
+        Toast.makeText(this, "Sesión cerrada correctamente.", Toast.LENGTH_SHORT).show()
     }
 
     private fun cargarEstadisticas() {
@@ -54,9 +89,9 @@ class usuario : AppCompatActivity() {
                     val estadisticas = response.body()
                     if (estadisticas != null) {
                         // Actualizar los valores en la interfaz
-                        findViewById<TextView>(R.id.textTotal).text = "Total de Libros: ${estadisticas.total}"
-                        findViewById<TextView>(R.id.textLeidos).text = "Libros Leídos: ${estadisticas.leidos}"
-                        findViewById<TextView>(R.id.textSinLeer).text = "Libros Sin Leer: ${estadisticas.sin_leer}"
+                        findViewById<TextView>(R.id.textTotal).text = "${estadisticas.total}"
+                        findViewById<TextView>(R.id.textLeidos).text = "${estadisticas.leidos}"
+                        findViewById<TextView>(R.id.textSinLeer).text = "${estadisticas.sin_leer}"
                     }
                 } else {
                     Toast.makeText(this@usuario, "Error al cargar estadísticas", Toast.LENGTH_SHORT).show()

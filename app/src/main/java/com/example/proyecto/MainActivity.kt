@@ -19,6 +19,17 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Verificar si la sesión está activa
+        val sharedPreferences = getSharedPreferences("SesionUsuario", MODE_PRIVATE)
+        val sesionActiva = sharedPreferences.getBoolean("sesion_activa", false)
+
+        if (sesionActiva) {
+            // Redirigir a la pantalla principal si la sesión está activa
+            val intent = Intent(this, usuario::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         // Configurar el botón de registro
         binding.btnRegistro.setOnClickListener {
             val intent = Intent(this, registro::class.java)
@@ -45,12 +56,19 @@ class MainActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val loginResponse = response.body()
                     if (loginResponse != null && loginResponse.estado == "exito") {
-                        // Manejar la respuesta exitosa
-                        Toast.makeText(this@MainActivity, loginResponse.mensaje, Toast.LENGTH_SHORT).show()
+                        // Guardar sesión en SharedPreferences
+                        val sharedPreferences = getSharedPreferences("SesionUsuario", MODE_PRIVATE)
+                        val editor = sharedPreferences.edit()
+                        editor.putInt("id_usuario", loginResponse.id_usuario ?: -1)
+                        editor.putString("nombre", loginResponse.nombre)
+                        editor.putString("correo", loginResponse.correo) // Guardar correo
+                        editor.putBoolean("sesion_activa", true)
+                        editor.apply()
 
-                        // Aquí puedes navegar a otra actividad o realizar alguna otra acción
+                        // Redirigir a la actividad principal del usuario
                         val intent = Intent(this@MainActivity, usuario::class.java)
                         startActivity(intent)
+                        finish()
                     } else {
                         Toast.makeText(this@MainActivity, loginResponse?.mensaje ?: "Error desconocido", Toast.LENGTH_SHORT).show()
                     }
@@ -60,10 +78,9 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                println("MainActivity: Error de conexión: ${t.message}")
                 Toast.makeText(this@MainActivity, "Error de conexión: ${t.message}", Toast.LENGTH_SHORT).show()
-
             }
         })
     }
+
 }

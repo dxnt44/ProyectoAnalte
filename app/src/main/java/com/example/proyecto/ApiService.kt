@@ -25,7 +25,7 @@ interface ApiService {
     ): Call<RegistroResponse>
 
     @FormUrlEncoded
-    @POST("agregar_libro.php") // Ruta del archivo PHP
+    @POST("http://192.168.100.164/analte/agregar_libro.php") // Ruta del archivo PHP
     fun agregarLibro(
         @Field("id_usuario") idUsuario: Int,
         @Field("titulo") titulo: String,
@@ -38,7 +38,7 @@ interface ApiService {
     ): Call<Respuesta>
 
     @FormUrlEncoded
-    @POST("obtener_estadisticas.php")
+    @POST("http://192.168.100.164/analte/obtener_estadisticas.php")
     fun obtenerEstadisticas(
         @Field("id_usuario") idUsuario: Int
     ): Call<EstadisticasResponse>
