@@ -43,7 +43,7 @@
         app:srcCompat="@drawable/user_icon_on_transparent_background_free_png" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/textNombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="144dp"
@@ -55,7 +55,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/textCorreo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="108dp"
@@ -67,7 +67,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
     <EditText
-        android:id="@+id/total_libros"
+        android:id="@+id/textTotal"
         android:layout_width="50dp"
         android:layout_height="40dp"
         android:layout_marginTop="404dp"
@@ -107,10 +107,10 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintTop_toBottomOf="@+id/textCorreo" />
 
     <EditText
-        android:id="@+id/libros_leidos"
+        android:id="@+id/textLeidos"
         android:layout_width="50dp"
         android:layout_height="40dp"
         android:layout_marginTop="492dp"
@@ -140,7 +140,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/libros_sin_leer"
+        android:id="@+id/textSinLeer"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="576dp"
@@ -159,16 +159,89 @@
 
     <ImageView
         android:id="@+id/imageView6"
-        android:layout_width="89dp"
-        android:layout_height="76dp"
-        android:layout_marginStart="306dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="69dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="36dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.975"
+        app:layout_constraintVertical_bias="0.885"
         app:srcCompat="@drawable/rese_a" />
 
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:background="#A6775B"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="103dp"
+            android:layout_height="match_parent"
+            android:gravity="center|center_horizontal"
+            android:orientation="horizontal"
+            android:translationX="10sp">
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/libros"
+                app:tint="#FFFFFF" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="103dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:translationX="35dp">
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/boton_agregar"
+                app:tint="#D9B391" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="91dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:translationX="70dp">
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/avatar"
+                app:tint="#FFFFFF" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnCerrarSesion"
+        android:layout_width="96dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="588dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="18dp"
+        android:background="@drawable/boton_redondo"
+        android:gravity="center"
+        android:text="Cerrar Sesion"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

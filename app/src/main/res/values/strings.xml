@@ -6,4 +6,7 @@
     <string name="title_activity_api_service">ApiService</string>
     <string name="title_activity_login_response">LoginResponse</string>
     <string name="title_activity_registro_response">RegistroResponse</string>
+    <string name="title_activity_añadir_libro">AñadirLibro</string>
+    <string name="title_activity_biblioteca">Biblioteca</string>
+    <string name="title_activity_añadir_manual">AñadirManual</string>
 </resources>
