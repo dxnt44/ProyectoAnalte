@@ -67,6 +67,7 @@
         android:background="@drawable/plaintext_redondo"
         android:ems="10"
         android:inputType="text"
+        android:paddingHorizontal="5dp"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
@@ -104,6 +105,7 @@
         android:background="@drawable/plaintext_redondo"
         android:ems="10"
         android:inputType="text"
+        android:paddingHorizontal="5dp"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
@@ -117,6 +119,7 @@
         android:background="@drawable/plaintext_redondo"
         android:ems="10"
         android:inputType="text"
+        android:paddingHorizontal="5dp"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
@@ -130,6 +133,7 @@
         android:background="@drawable/plaintext_redondo"
         android:ems="10"
         android:inputType="text"
+        android:paddingHorizontal="5dp"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />

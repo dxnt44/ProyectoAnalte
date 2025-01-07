@@ -89,8 +89,8 @@ class AnadirManual : AppCompatActivity() {
             return
         }
 
-        val titulo = binding.editTextText9.text.toString()
-        val autor = binding.editTextText8.text.toString()
+        val titulo = binding.editTextText8.text.toString()
+        val autor = binding.editTextText9.text.toString()
         val genero = binding.editTextText10.text.toString()
         val paginasTotales = binding.editTextText11.text.toString()
         val paginaActual = binding.editTextText12.text.toString()

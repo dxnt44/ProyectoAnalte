@@ -46,11 +46,11 @@
         android:id="@+id/textNombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="144dp"
         android:layout_marginTop="300dp"
         android:text="Nombre"
         android:textColor="@color/black"
         android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -92,24 +92,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textCorreo" />
 
-    <EditText
-        android:id="@+id/textLeidos"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="492dp"
-        android:background="@drawable/texto_redondo"
-        android:gravity="center"
-        android:inputType="text"
-        android:padding="10dp"
-        android:text="0"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
@@ -119,24 +101,6 @@
         android:text="Libros sin Leer:"
         android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/textSinLeer"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="576dp"
-        android:background="@drawable/texto_redondo"
-        android:gravity="center"
-        android:inputType="number"
-        android:padding="10dp"
-        android:text="0"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -237,6 +201,41 @@
         android:layout_marginEnd="153dp"
         android:background="@drawable/texto_redondo"
         android:gravity="center"
+        android:text="0"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+    <TextView
+        android:id="@+id/textLeidos"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="104dp"
+        android:layout_marginEnd="153dp"
+        android:background="@drawable/texto_redondo"
+        android:gravity="center"
+        android:text="0"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+    <TextView
+        android:id="@+id/textSinLeer"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="196dp"
+        android:layout_marginEnd="153dp"
+        android:background="@drawable/texto_redondo"
+        android:gravity="center"
+        android:text="0"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
