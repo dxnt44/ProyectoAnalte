@@ -5,5 +5,5 @@ data class LoginResponse(
     val mensaje: String,
     val id_usuario: Int? = null,
     val nombre: String? = null,
-    val correo: String? = null // Nuevo campo
+    val correo: String? = null
 )

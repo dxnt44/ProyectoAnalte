@@ -9,4 +9,9 @@
     <string name="title_activity_añadir_libro">AñadirLibro</string>
     <string name="title_activity_biblioteca">Biblioteca</string>
     <string name="title_activity_añadir_manual">AñadirManual</string>
+    <string name="title_activity_editar_libro">EditarLibro</string>
+    <string name="default_titulo">Sin Título</string>
+    <string name="default_autor">Desconocido</string>
+    <string name="default_genero">Desconocido</string>
+    <string name="error_cargar_imagen">Error al cargar la imagen de portada</string>
 </resources>

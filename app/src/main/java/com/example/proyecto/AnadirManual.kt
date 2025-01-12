@@ -92,8 +92,8 @@ class AnadirManual : AppCompatActivity() {
         val titulo = binding.editTextText8.text.toString()
         val autor = binding.editTextText9.text.toString()
         val genero = binding.editTextText10.text.toString()
-        val paginasTotales = binding.editTextText11.text.toString()
-        val paginaActual = binding.editTextText12.text.toString()
+        val paginasTotales = binding.editTotales.text.toString()
+        val paginaActual = binding.editActual.text.toString()
         val calificacion = binding.ratingBar3.rating
 
         // Validaciones
@@ -116,7 +116,7 @@ class AnadirManual : AppCompatActivity() {
             genero = genero,
             paginasTotales = paginasTotales.toInt(),
             paginaActual = paginaActual.toInt(),
-            calificacion = calificacion.toInt(),
+            calificacion = calificacion,
             portada = imagenBase64
         )
 

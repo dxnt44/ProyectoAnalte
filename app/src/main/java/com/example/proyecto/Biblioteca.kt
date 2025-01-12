@@ -7,12 +7,16 @@ import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -20,7 +24,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.proyecto.databinding.BibliotecaBinding
@@ -29,8 +37,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import android.util.Base64
 import android.graphics.BitmapFactory
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextDecoration
+import android.util.Log
 
 class Biblioteca : AppCompatActivity() {
 
@@ -43,18 +50,15 @@ class Biblioteca : AppCompatActivity() {
 
         // Configurar barra de navegación
         binding.imageView7.setOnClickListener {
-            val intent = Intent(this, Biblioteca::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, Biblioteca::class.java))
         }
 
         binding.imageView4.setOnClickListener {
-            val intent = Intent(this, usuario::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, usuario::class.java))
         }
 
         binding.imageView5.setOnClickListener {
-            val intent = Intent(this, AnadirLibro::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, AnadirLibro::class.java))
         }
 
         // Integrar Compose para mostrar la lista de libros
@@ -62,7 +66,7 @@ class Biblioteca : AppCompatActivity() {
         if (idUsuario != -1) {
             binding.composeContainer.setContent {
                 MaterialTheme {
-                    BibliotecaComposeScreen(idUsuario = idUsuario, apiService = RetrofitClient.apiService, context = this)
+                    BibliotecaComposeScreen(idUsuario = idUsuario, apiService = RetrofitClient.apiService)
                 }
             }
         } else {
@@ -74,11 +78,12 @@ class Biblioteca : AppCompatActivity() {
 @Composable
 fun BibliotecaComposeScreen(
     idUsuario: Int,
-    apiService: ApiService,
-    context: Context
+    apiService: ApiService
 ) {
     var libros by remember { mutableStateOf<List<Libro>>(emptyList()) }
     var searchQuery by remember { mutableStateOf(TextFieldValue("")) }
+
+    val context = LocalContext.current // Usar LocalContext para obtener el contexto
 
     // Cargar los libros al iniciar la pantalla
     LaunchedEffect(Unit) {
@@ -88,6 +93,7 @@ fun BibliotecaComposeScreen(
                     val respuesta = response.body()
                     if (respuesta?.estado == "exito") {
                         libros = respuesta.libros
+                        Log.d("BibliotecaComposeScreen", "Libros cargados: ${libros.size}")
                     } else {
                         Toast.makeText(context, "Error: ${respuesta?.estado}", Toast.LENGTH_SHORT).show()
                     }
@@ -102,8 +108,14 @@ fun BibliotecaComposeScreen(
         })
     }
 
-    val filteredLibros = libros.filter {
-        it.titulo.contains(searchQuery.text, ignoreCase = true)
+    val filteredLibros by remember {
+        derivedStateOf {
+            libros.filter { libro ->
+                libro.titulo.contains(searchQuery.text, ignoreCase = true) ||
+                        libro.autor.contains(searchQuery.text, ignoreCase = true) ||
+                        libro.genero.contains(searchQuery.text, ignoreCase = true)
+            }
+        }
     }
 
     Column(
@@ -111,19 +123,7 @@ fun BibliotecaComposeScreen(
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        Text(
-            text = "Buscar:",
-            color = Color.Gray,
-            fontSize = 20.sp,
-            modifier = Modifier.padding(bottom = 8.dp)
-        )
-        BasicTextField(
-            value = searchQuery,
-            onValueChange = { searchQuery = it },
-            modifier = Modifier
-                .fillMaxWidth()
-                //.padding(8.dp)
-        )
+        SearchBar(searchQuery) { searchQuery = it }
 
         // Grid de libros con scroll
         LazyVerticalGrid(
@@ -131,19 +131,55 @@ fun BibliotecaComposeScreen(
             modifier = Modifier.fillMaxSize()
         ) {
             items(filteredLibros.size) { index ->
-                LibroCard(libro = filteredLibros[index])
+                val libro = filteredLibros[index]
+                LibroCard(libro = libro, onLibroClick = {
+                    // Enviar solo ID del libro y ID del usuario
+                    val intent = Intent(context, EditarLibro::class.java).apply {
+                        putExtra("id", libro.id)
+                        putExtra("id_usuario", idUsuario)
+                    }
+                    context.startActivity(intent)
+                })
             }
         }
     }
 }
 
 @Composable
-fun LibroCard(libro: Libro) {
-    val imageBitmap = remember {
+fun SearchBar(searchQuery: TextFieldValue, onValueChange: (TextFieldValue) -> Unit) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(Color(0xFFD9B391), RoundedCornerShape(8.dp))
+            .padding(horizontal = 8.dp, vertical = 4.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = "Buscar:",
+            fontSize = 16.sp,
+            color = Color.White,
+            modifier = Modifier.padding(end = 8.dp)
+        )
+        BasicTextField(
+            value = searchQuery,
+            onValueChange = onValueChange,
+            modifier = Modifier.fillMaxWidth(),
+            textStyle = TextStyle(color = Color.White, fontSize = 14.sp),
+            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Search),
+            keyboardActions = KeyboardActions(onSearch = { /* Acción de búsqueda */ })
+        )
+    }
+}
+
+@Composable
+fun LibroCard(libro: Libro, onLibroClick: (Libro) -> Unit) {
+    val imageBitmap = remember(libro.portada) {
         decodeBase64ToImage(libro.portada)
     }
     Column(
-        modifier = Modifier.padding(8.dp),
+        modifier = Modifier
+            .padding(8.dp)
+            .clickable { onLibroClick(libro) },
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         imageBitmap?.let {
