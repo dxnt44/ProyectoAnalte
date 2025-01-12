@@ -65,7 +65,7 @@ interface ApiService {
         @Field("genero") genero: String,
         @Field("paginas_totales") paginasTotales: Int,
         @Field("pagina_actual") paginaActual: Int,
-        @Field("calificacion") calificacion: Int,
+        @Field("calificacion") calificacion: Float,
         @Field("portada") portada: String
     ): Call<RespuestaBase>
 

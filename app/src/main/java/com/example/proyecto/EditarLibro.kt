@@ -183,7 +183,7 @@ class EditarLibro : AppCompatActivity() {
             genero = genero,
             paginasTotales = paginasTotales,
             paginaActual = paginaActual,
-            calificacion = calificacion.toInt(),
+            calificacion = calificacion,
             portada = imagenBase64 ?: "" // Mandar string vacío si no hay ninguna portada
         ).enqueue(object : Callback<RespuestaBase> {
             override fun onResponse(call: Call<RespuestaBase>, response: Response<RespuestaBase>) {

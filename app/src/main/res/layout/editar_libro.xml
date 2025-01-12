@@ -332,6 +332,8 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="45dp"
         android:backgroundTint="#A0A0A0"
+        android:progressBackgroundTint="@color/black"
+        android:progressTint="#5EC74B"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView20" />
