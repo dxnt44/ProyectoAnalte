@@ -14,4 +14,5 @@
     <string name="default_autor">Desconocido</string>
     <string name="default_genero">Desconocido</string>
     <string name="error_cargar_imagen">Error al cargar la imagen de portada</string>
+    <string name="title_activity_resena">Resena</string>
 </resources>

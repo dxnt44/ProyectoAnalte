@@ -26,6 +26,7 @@ class EditarLibro : AppCompatActivity() {
     private var idUsuario: Int = -1
     private var portadaActual: String? = null // Para almacenar la portada existente
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -46,6 +47,7 @@ class EditarLibro : AppCompatActivity() {
         binding.imageView5.setOnClickListener {
             startActivity(Intent(this, AnadirLibro::class.java))
         }
+
 
         // Obtener datos del Intent
         libroId = intent.getIntExtra("id", -1)
@@ -69,6 +71,17 @@ class EditarLibro : AppCompatActivity() {
         binding.imageView15.setOnClickListener {
             actualizarLibro()
         }
+
+        binding.imageView14.setOnClickListener {
+            val titulo = binding.editTextText8.text.toString()
+            val intent = Intent(this, Resena::class.java).apply {
+                putExtra("id_libro", libroId)
+                putExtra("id_usuario", idUsuario)
+                putExtra("titulo_libro", titulo)
+            }
+            startActivity(intent)
+        }
+
     }
 
     private fun cargarDatosLibro() {

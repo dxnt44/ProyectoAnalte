@@ -77,5 +77,29 @@ interface ApiService {
         @Field("id_libro") idLibro: Int
     ): Call<DetalleLibroResponse>
 
+    @FormUrlEncoded
+    //@POST("http://192.168.249.239/analte/crear_reseña.php")
+    @POST("http://192.168.100.164/analte/crear_resena.php")
+    fun crearResena(
+        @Field("id_libro") idLibro: Int,
+        @Field("id_usuario") idUsuario: Int,
+        @Field("resena") resena: String
+    ): Call<Respuesta>
+
+    @FormUrlEncoded
+    //@POST("http://192.168.249.239/analte/editar_reseña.php")
+    @POST("http://192.168.100.164/analte/editar_resena.php")
+    fun editarResena(
+        @Field("id_resena") idResena: Int,
+        @Field("resena") resena: String
+    ): Call<Respuesta>
+
+    @FormUrlEncoded
+    //@POST("http://192.168.249.239/analte/obtener_resena.php")
+    @POST("http://192.168.100.164/analte/obtener_resena.php")
+    fun obtenerResena(
+        @Field("id_libro") idLibro: Int,
+        @Field("id_usuario") idUsuario: Int
+    ): Call<ObtenerResenaResponse>
 
 }

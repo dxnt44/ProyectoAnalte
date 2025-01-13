@@ -17,6 +17,11 @@
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".Resena"
+            android:exported="false"
+            android:label="@string/title_activity_resena"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
             android:name=".EditarLibro"
             android:exported="false"
             android:label="@string/title_activity_editar_libro"
